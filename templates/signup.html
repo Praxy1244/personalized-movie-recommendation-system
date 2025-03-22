@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Movie Recommender</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url('https://source.unsplash.com/1920x1080/?cinema') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.6);
+        }
+        .form-box {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.4);
+        }
+        .form-box h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .form-box input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        .form-box input[type="submit"] {
+            background: #e50914;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .form-box input[type="submit"]:hover {
+            background: #f40612;
+        }
+        .form-box a {
+            color: #b3b3b3;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .form-box a:hover {
+            color: #fff;
+        }
+        .form-box .login-link {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-box">
+            <h1>Sign Up</h1>
+            <form method="POST" action="/signup">
+                <input type="text" name="username" placeholder="Choose a Username" required>
+                <input type="password" name="password" placeholder="Choose a Password" required>
+                <input type="submit" value="Sign Up">
+            </form>
+            <p class="login-link">
+                Already have an account? <a href="/login">Login here</a>.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

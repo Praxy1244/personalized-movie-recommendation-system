@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trending Movies</title>
+    <style>
+        body {
+            background-color: #181818;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: #e50914;
+            margin-top: 50px;
+            font-size: 36px;
+            text-shadow: #000000 0px 0px 13px;
+        }
+
+        .movie-content {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); /* 5 items per row */
+            gap: 20px;
+            padding: 20px;
+            margin: 0 auto;
+            max-width: 1200px; /* Adjust for screen width */
+        }
+
+        .movie {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .movie img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+        .movie h3 {
+            color: #e50914;
+            margin-top: 10px;
+            font-size: 18px;
+        }
+
+        .movie p {
+            color: #ccc;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .movie:hover {
+            transform: scale(1.05);
+            cursor: pointer;
+        }
+
+        .back-btn {
+            background-color: #e50914;
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        .back-btn:hover {
+            background-color: #ff4040;
+        }
+
+        #loader {
+            display: block;
+            position: fixed;
+            z-index: 100;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.7);
+            background-image: url('/static/loader.gif');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 50px;
+        }
+
+        #loader-text {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        @media only screen and (max-width: 1200px) {
+            .movie-content {
+                grid-template-columns: repeat(4, 1fr); /* 4 items per row for medium screens */
+            }
+        }
+
+        @media only screen and (max-width: 900px) {
+            .movie-content {
+                grid-template-columns: repeat(3, 1fr); /* 3 items per row for small screens */
+            }
+        }
+
+        @media only screen and (max-width: 600px) {
+            .movie-content {
+                grid-template-columns: repeat(2, 1fr); /* 2 items per row for extra small screens */
+            }
+        }
+
+        @media only screen and (max-width: 400px) {
+            .movie-content {
+                grid-template-columns: 1fr; /* 1 item per row for very small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Trending Movies</h1>
+
+    <!-- Loader (Visible while fetching data) -->
+    <div id="loader">
+        <div id="loader-text">Loading Trending Movies...</div>
+    </div>
+
+    <!-- Trending Movies Section -->
+    <div class="movie-content" id="trending-section" style="display: none;">
+        {% if trending %}
+            {% for movie in trending %}
+                <div class="movie">
+                    <h3>{{ movie.title }}</h3>
+                    <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
+                    <p>{{ movie.overview[:100] }}...</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No trending movies available.</p>
+        {% endif %}
+    </div>
+
+    <!-- Back Button -->
+    <a href="{{ url_for('home') }}" class="back-btn">Back to Home</a>
+
+    <script>
+        window.onload = function() {
+            // Hide loader and show movie section after page load
+            document.getElementById("loader").style.display = "none";
+            document.getElementById("trending-section").style.display = "block";
+        };
+    </script>
+
+</body>
+</html>
